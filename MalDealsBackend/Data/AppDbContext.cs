@@ -1,7 +1,7 @@
-using MalDeals.Models.Entitys;
+using MalDealsBackend.Models.Entitys;
 using Microsoft.EntityFrameworkCore;
 
-namespace MalDeals.Data
+namespace MalDealsBackend.Data
 {
     public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
     {

@@ -3,7 +3,7 @@ using System.Security.Claims;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 
-namespace MalDeals.Services
+namespace MalDealsBackend.Services
 {
     public class JwtService
     {

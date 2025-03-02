@@ -1,14 +1,8 @@
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
-using MalDeals.Models;
-using MalDeals.Models.DTOs;
 using Microsoft.EntityFrameworkCore;
 
-namespace MalDeals.Models.Entitys
+namespace MalDealsBackend.Models.Entitys
 {
     [Table("users")]
     [Index(nameof(Name), IsUnique = true)]

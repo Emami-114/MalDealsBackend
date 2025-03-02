@@ -1,6 +1,6 @@
 using dotenv.net;
 
-namespace MalDeals.Services
+namespace MalDealsBackend.Services
 {
     public class ConfigManager
     {

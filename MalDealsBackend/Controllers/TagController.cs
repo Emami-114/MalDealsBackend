@@ -1,9 +1,9 @@
-using MalDeals.Models.DTOs;
-using MalDeals.Models.Entitys;
-using MalDeals.Services;
+using MalDealsBackend.Models.DTOs;
+using MalDealsBackend.Models.Entitys;
+using MalDealsBackend.Services;
 using Microsoft.AspNetCore.Mvc;
 
-namespace MalDeals.Controllers
+namespace MalDealsBackend.Controllers
 {
     [ApiController]
     [Route("api/tags")]

@@ -1,7 +1,7 @@
-using MalDeals.Models.Entitys;
+using MalDealsBackend.Models.Entitys;
 using Microsoft.AspNetCore.Identity;
 
-namespace MalDeals.Services
+namespace MalDealsBackend.Services
 {
     public class PasswordService
     {

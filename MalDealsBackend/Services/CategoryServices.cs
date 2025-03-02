@@ -1,8 +1,8 @@
-using MalDeals.Data;
-using MalDeals.Models.Entitys;
+using MalDealsBackend.Data;
+using MalDealsBackend.Models.Entitys;
 using Microsoft.EntityFrameworkCore;
 
-namespace MalDeals.Services
+namespace MalDealsBackend.Services
 {
     public class CategoryServices(AppDbContext dbContext)
     {

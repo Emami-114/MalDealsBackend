@@ -1,9 +1,9 @@
-using MalDeals.Data;
-using MalDeals.Models;
-using MalDeals.Models.Entitys;
+using MalDealsBackend.Data;
+using MalDealsBackend.Models;
+using MalDealsBackend.Models.Entitys;
 using Microsoft.EntityFrameworkCore;
 
-namespace MalDeals.Services
+namespace MalDealsBackend.Services
 {
     public class DealServices(AppDbContext dbContext)
     {

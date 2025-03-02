@@ -1,6 +1,6 @@
-using MalDeals.Services;
+using MalDealsBackend.Services;
 
-namespace MalDeals.Middleware
+namespace MalDealsBackend.Middleware
 {
     public class ApiKeyMiddleware
     {

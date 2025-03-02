@@ -1,7 +1,7 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace MalDeals.Utils;
+namespace MalDealsBackend.Utils;
 public static class JsonUtils
 {
     public static readonly JsonSerializerOptions DefaultOptions = new JsonSerializerOptions

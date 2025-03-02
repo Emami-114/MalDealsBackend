@@ -1,12 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using MalDeals.Data;
-using MalDeals.Models.Entitys;
+using MalDealsBackend.Data;
+using MalDealsBackend.Models.Entitys;
 using Microsoft.EntityFrameworkCore;
 
-namespace MalDeals.Services
+namespace MalDealsBackend.Services
 {
     public class DealVoteServices(AppDbContext dbContext)
     {

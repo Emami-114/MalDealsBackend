@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
-using MalDeals.Models.Entitys;
+using MalDealsBackend.Models.Entitys;
 
-namespace MalDeals.Models.DTOs
+namespace MalDealsBackend.Models.DTOs
 {
     public record RegisterUserModelDto(
         string Name,
