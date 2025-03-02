@@ -1,6 +1,6 @@
-using MalDeals.Models.Entitys;
+using MalDealsBackend.Models.Entitys;
 
-namespace MalDeals.Models.DTOs
+namespace MalDealsBackend.Models.DTOs
 {
     public record TagDto(
         string Title

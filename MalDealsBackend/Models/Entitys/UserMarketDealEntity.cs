@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 
-namespace MalDeals.Models.Entitys
+namespace MalDealsBackend.Models.Entitys
 {
     [Table("user_market_deals")]
     public class UserMarketDealEntity

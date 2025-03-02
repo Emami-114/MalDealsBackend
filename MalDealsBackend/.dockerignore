@@ -1,0 +1,10 @@
+# Build-Ordner
+bin/
+obj/
+# Visual Studio spezifische Dateien
+.vs/
+*.suo
+*.user
+*.tt~
+packages/
+.env

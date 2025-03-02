@@ -1,14 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using MalDeals.Controllers;
-using MalDeals.Data;
-using MalDeals.Services;
+using MalDealsBackend.Services;
 using Microsoft.OpenApi.Models;
 
-namespace MalDeals.Middleware
+namespace MalDealsBackend.Middleware
 {
     public static class SwaggerConfig
     {
