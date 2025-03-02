@@ -55,7 +55,6 @@ if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
     app.UseSwaggerUIConfiguration();
-    var apiKeyString = apiKeyService.ApiKeyGenerator("Customer");
     app.MapScalarApiReference("/scalar");
 }
 
