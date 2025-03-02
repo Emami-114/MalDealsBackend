@@ -1,7 +1,7 @@
 using MalDealsBackend.Models.DTOs;
 using MalDealsBackend.Models.Entitys;
 using MalDealsBackend.Services;
-using MalDealsBackend.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 
 namespace MalDealsBackend.Controllers
 {

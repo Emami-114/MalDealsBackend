@@ -2,7 +2,7 @@ using System.Text;
 using MalDealsBackend.Services;
 using Microsoft.OpenApi.Models;
 
-namespace MalDeals.Middleware
+namespace MalDealsBackend.Middleware
 {
     public static class SwaggerConfig
     {
