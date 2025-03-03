@@ -58,8 +58,8 @@ if (app.Environment.IsDevelopment())
     app.MapScalarApiReference("/scalar");
 }
 
-/* app.UseMiddleware<ApiKeyMiddleware>();
- */
+app.UseMiddleware<ApiKeyMiddleware>();
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseHttpsRedirection();

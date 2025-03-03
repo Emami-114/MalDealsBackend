@@ -1,11 +1,13 @@
 using dotenv.net;
+using MalDealsBackend.Models;
 
 namespace MalDealsBackend.Services
 {
     public class ConfigManager
     {
-        public JwtConfig Jwt { get; private set; }
-        public DbConfig Database { get; private set; }
+        public ConfigModel.JwtConfig Jwt { get; private set; }
+        public ConfigModel.DbConfig Database { get; private set; }
+        public ConfigModel.ApiKeyConfig ApiKey { get; private set; }
 
         public ConfigManager()
         {
@@ -13,7 +15,7 @@ namespace MalDealsBackend.Services
             DotEnv.Load();
 
             // JWT-Config initialisieren
-            Jwt = new JwtConfig
+            Jwt = new ConfigModel.JwtConfig
             {
                 SecretKey = GetEnv("JWT_SECRET_KEY", "default-secret"),
                 Issuer = GetEnv("JWT_ISSUER", "default-issuer"),
@@ -22,11 +24,17 @@ namespace MalDealsBackend.Services
             };
 
             // DB-Config initialisieren
-            Database = new DbConfig
+            Database = new ConfigModel.DbConfig
             {
                 ConnectionString = GetEnv("DB_CONNECTION_STRING", "Host=localhost;Database=mydb;Username=user;Password=pass"),
                 DatabaseType = GetEnv("DB_TYPE", "PostgreSQL")
             };
+
+            ApiKey = new ConfigModel.ApiKeyConfig
+            {
+                SecretKey = GetEnv("API_KEY_SECRET_KEY","default-secret")
+            };
+
         }
 
         private string GetEnv(string key, string defaultValue)
@@ -34,18 +42,4 @@ namespace MalDealsBackend.Services
             return Environment.GetEnvironmentVariable(key) ?? defaultValue;
         }
     }
-}
-
-public class JwtConfig
-{
-    public string SecretKey { get; set; } = string.Empty;
-    public string Issuer { get; set; } = string.Empty;
-    public string Audience { get; set; } = string.Empty;
-    public int TokenExpiryMinutes { get; set; }
-}
-
-public class DbConfig
-{
-    public string ConnectionString { get; set; } = string.Empty;
-    public string DatabaseType { get; set; } = string.Empty;
 }

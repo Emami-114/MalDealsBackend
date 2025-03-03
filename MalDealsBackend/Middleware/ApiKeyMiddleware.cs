@@ -33,14 +33,12 @@ namespace MalDealsBackend.Middleware
             }
 
 
-            if (!_apiKeyService.ValidateApiKey(apiKey, out var userRole))
+            if (!_apiKeyService.ValidateApiKey(apiKey, out var deviceId))
             {
                 context.Response.StatusCode = 403;
                 await context.Response.WriteAsync("Invalid API Key");
                 return;
             }
-
-            context.Items["UserRole"] = userRole;
             await _next(context);
         }
     }
