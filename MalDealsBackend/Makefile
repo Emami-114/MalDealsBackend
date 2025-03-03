@@ -11,3 +11,6 @@ dbUpdate:
 
 watch:
 	dotnet watch run
+
+run:
+	dotnet run

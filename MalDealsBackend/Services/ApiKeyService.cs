@@ -11,43 +11,55 @@ namespace MalDealsBackend.Services
         {
             _config = configManager;
         }
-        public string ApiKeyGenerator(string userRole)
+        public string ApiKeyGenerator(string deviceId)
         {
             var timestamp = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
-            var rawData = $"{userRole}:{timestamp}";
+            var rawData = $"{deviceId}:{timestamp}";
 
-            using var hmac = new HMACSHA256(Encoding.UTF8.GetBytes(_config.Jwt.SecretKey));
+            using var hmac = new HMACSHA256(Encoding.UTF8.GetBytes(_config.ApiKey.SecretKey));
             var hash = Convert.ToBase64String(hmac.ComputeHash(Encoding.UTF8.GetBytes(rawData)))
             .Replace("+", "-")
             .Replace("/", "_")
             .Replace("=", "");
-
-            Console.WriteLine("userRole: " + userRole);
-            Console.WriteLine("timestamp: " + timestamp);
-            Console.WriteLine("hash: " + hash);
-            return $"{userRole}:{timestamp}:{hash}";
+            return $"{deviceId}:{timestamp}:{hash}";
         }
 
-        public bool ValidateApiKey(string apiKey, out string userRole)
+        public bool ValidateApiKey(string apiKey, out string deviceId)
         {
-            userRole = string.Empty;
+            deviceId = string.Empty;
 
             var parts = apiKey.Split(':');
             if (parts.Length != 3) return false; // API-Key muss 3 Teile haben!
 
-            userRole = parts[0];
+            deviceId = parts[0];
             var timestamp = parts[1];
-            var receivedHash = parts[2];
+            var signature = parts[2];
 
-            var rawData = $"{userRole}:{timestamp}";
+            var rawData = $"{deviceId}:{timestamp}";
 
-            using var hmac = new HMACSHA256(Encoding.UTF8.GetBytes(_config.Jwt.SecretKey));
+            using var hmac = new HMACSHA256(Encoding.UTF8.GetBytes(_config.ApiKey.SecretKey));
             var expectedHash = Convert.ToBase64String(hmac.ComputeHash(Encoding.UTF8.GetBytes(rawData)))
             .Replace("+", "-")
             .Replace("/", "_")
             .Replace("=", "");
 
-            return expectedHash == receivedHash;
+            return expectedHash == signature;
+        }
+
+
+        public bool ValidateSignature(string deviceId, string timestamp, string signature)
+        {
+            string secretKey = "DEIN_GEHEIMER_KEY"; // Sicher speichern (z.B. in appsettings.json)
+            string data = $"{deviceId}:{timestamp}";
+
+            using var hmac = new HMACSHA256(Encoding.UTF8.GetBytes(secretKey));
+            byte[] hash = hmac.ComputeHash(Encoding.UTF8.GetBytes(data));
+            string expectedSignature = Convert.ToBase64String(hash)
+                .Replace("+", "-")
+                .Replace("/", "_")
+                .Replace("=", "");
+
+            return expectedSignature == signature;
         }
     }
 }
