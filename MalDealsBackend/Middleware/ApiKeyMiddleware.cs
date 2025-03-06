@@ -2,16 +2,10 @@ using MalDealsBackend.Services;
 
 namespace MalDealsBackend.Middleware
 {
-    public class ApiKeyMiddleware
+    public class ApiKeyMiddleware(RequestDelegate next, ApiKeyService apiKeyService)
     {
-        private readonly RequestDelegate _next;
-        private readonly ApiKeyService _apiKeyService;
-
-        public ApiKeyMiddleware(RequestDelegate next, ApiKeyService apiKeyService)
-        {
-            _next = next;
-            _apiKeyService = apiKeyService;
-        }
+        private readonly RequestDelegate _next = next;
+        private readonly ApiKeyService _apiKeyService = apiKeyService;
 
         public async Task Invoke(HttpContext context)
         {

@@ -48,6 +48,7 @@ builder.Services.AddScoped<MarketDealServices>();
 builder.Services.AddScoped<DealVoteServices>();
 builder.Services.AddSingleton<ApiKeyService>();
 builder.Services.AddScoped<SwaggerUserService>();
+builder.Services.AddSingleton<MinioService>();
 
 var app = builder.Build();
 // Configure the HTTP request pipeline.

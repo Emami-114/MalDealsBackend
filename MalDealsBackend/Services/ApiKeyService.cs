@@ -24,10 +24,10 @@ namespace MalDealsBackend.Services
             return $"{deviceId}:{timestamp}:{hash}";
         }
 
-        public bool ValidateApiKey(string apiKey, out string deviceId)
+        public bool ValidateApiKey(string? apiKey, out string deviceId)
         {
             deviceId = string.Empty;
-
+            if (string.IsNullOrEmpty(apiKey)) { return false; }
             var parts = apiKey.Split(':');
             if (parts.Length != 3) return false; // API-Key muss 3 Teile haben!
 
