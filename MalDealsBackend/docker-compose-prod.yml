@@ -20,6 +20,7 @@ services:
       - maldeals_prod_network
 
   maldeals:
+    image: emami114/maldeals
     container_name: maldeals
     build:
       context: .
