@@ -52,7 +52,7 @@ jobs:
 
       - name: Build and push Docker images
         run: |
-          docker build -t emami114/maldeals:latest .
+          docker build -t emami114/maldeals:latest -f path/to/Dockerfile .
           docker push emami114/maldeals:latest
 
   deploy:
