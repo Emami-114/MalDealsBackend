@@ -76,7 +76,7 @@ jobs:
         run: scp -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa nginx.conf ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}:~
         
       - name: Copy docker-compose.prod.yml to VPS
-        run: sshpass -v -p '${{ secrets.SERVER_PASSWORD }}' scp -o StrictHostKeyChecking=no docker-compose.prod.yml root@${{ secrets.SERVER_HOST }}:~
+        run: scp -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa docker-compose.prod.yml root@${{ secrets.SERVER_HOST }}:~
 
       - name: Deploy
         uses: appleboy/ssh-action@master
