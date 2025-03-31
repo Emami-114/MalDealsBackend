@@ -3,6 +3,7 @@ services:
   postgres:
     image: postgres:latest
     container_name: postgres
+    restart: always
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
@@ -24,7 +25,7 @@ services:
     container_name: maldeals
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: ./MalDealsBackend/Dockerfile
     ports:
       - "5051:5051"
     environment:
