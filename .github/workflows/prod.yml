@@ -73,8 +73,8 @@ jobs:
           ssh-private-key: ${{secrets.SSH_PRIVATE_KEY}}
 
       - name: Copy nginx.conf to VPS
-        run: sshpass -v -p '${{ secrets.SERVER_PASSWORD }}' scp -o StrictHostKeyChecking=no nginx.conf root@${{ secrets.SERVER_HOST }}:~
-
+        run: scp -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa nginx.conf ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}:~
+        
       - name: Copy docker-compose.prod.yml to VPS
         run: sshpass -v -p '${{ secrets.SERVER_PASSWORD }}' scp -o StrictHostKeyChecking=no docker-compose.prod.yml root@${{ secrets.SERVER_HOST }}:~
 
