@@ -45,7 +45,7 @@ namespace MalDealsBackend.Middleware
                 {
                     using var scope = app.ApplicationServices.CreateScope();
                     var userService = scope.ServiceProvider.GetRequiredService<SwaggerUserService>();
-                    string authHeader = context.Request.Headers["Authorization"];
+                    string? authHeader = context.Request.Headers.Authorization;
                     if (string.IsNullOrEmpty(authHeader) || !await ValidateSwaggerUser(authHeader, userService))
                     {
                         // Fehlende oder falsche Authentifizierung → 401 Unauthorized senden

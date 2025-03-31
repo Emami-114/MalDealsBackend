@@ -2,6 +2,7 @@ using System.Text;
 using MalDealsBackend.Data;
 using MalDealsBackend.Middleware;
 using MalDealsBackend.Services;
+using MalDealsBackend.Utils;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -13,7 +14,6 @@ var configManager = new ConfigManager();
 var apiKeyService = new ApiKeyService(configManager);
 builder.Services.AddSingleton(configManager);
 builder.Services.AddSwaggerConfiguration();
-
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 .AddJwtBearer(options =>
 {
@@ -36,7 +36,8 @@ builder.Services.AddControllers();
 builder.Services.AddAuthorization();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
-options.UseNpgsql(configManager.Database.ConnectionString));
+options.UseNpgsql(builder.Configuration.GetConnectionString("Database")));
+
 builder.Services.AddSingleton<ConfigManager>(); builder.Services.AddScoped<DealServices>();
 builder.Services.AddScoped<CategoryServices>();
 builder.Services.AddScoped<ProviderServices>();
@@ -52,9 +53,10 @@ builder.Services.AddSingleton<MinioService>();
 
 var app = builder.Build();
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment() || app.Environment.IsStaging() || app.Environment.IsProduction())
 {
     app.MapOpenApi();
+    app.ApplyMigrations();
     app.UseSwaggerUIConfiguration();
     app.MapScalarApiReference("/scalar");
 }
