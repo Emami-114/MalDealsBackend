@@ -32,8 +32,7 @@ services:
       - ASPNETCORE_URLS=http://+:5051
       - ASPNETCORE_ENVIRONMENT=Production # Oder "Production" Or "Development"
       #- DATABASE_URL=${DB_CONNECTION_CONTAINER}
-      - ConnectionStrings__DefaultConnection=User ID=malDeals;Password=70d489eaa7ca4f85ba2d;Server=postgres;Port=5432;Database=deals_db; IntegratedSecurity=true;Pooling=true;
-      - Minio__Endpoint=${MINIO_ENDPOINT_CONTAINER}
+      - ConnectionStrings__DefaultConnection=Host=postgres;Port=5432;Database=deals_db;Username=malDeals;Password=70d489eaa7ca4f85ba2d
       - Minio__AccessKey=${MINIO_ROOT_USER}
       - Minio__SecretKey=${MINIO_ROOT_PASSWORD}
 
