@@ -51,9 +51,12 @@ jobs:
           password: ${{secrets.DOCKER_PASSWORD}}
 
       - name: Build and push Docker images
-        run: |
-          docker build -t emami114/maldeals:latest -f path/to/Dockerfile .
-          docker push emami114/maldeals:latest
+        uses: docker/bake-action@v2.3.0
+        with:
+          push: true
+          set: |
+            *.cache-from=type=gha
+            *.cache-to=type=gha,mode=max
 
   deploy:
     needs: build
