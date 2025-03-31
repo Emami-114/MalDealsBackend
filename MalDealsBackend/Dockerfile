@@ -13,7 +13,7 @@ WORKDIR "/src/MalDealsBackend"
 RUN dotnet build "MalDealsBackend.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "LearnSmartCoding.API.csproj" -c Release -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "MalDealsBackend.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
