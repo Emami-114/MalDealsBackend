@@ -85,7 +85,6 @@ jobs:
       
       - name: Deploy
         uses: appleboy/ssh-action@master
-        run: sshpass -p '${{ secrets.SERVER_PASSWORD }}' ssh -o StrictHostKeyChecking=no root@${{ secrets.SERVER_HOST }} << 'EOF'
         with:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USER }}
