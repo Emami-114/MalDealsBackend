@@ -49,7 +49,6 @@ services:
     environment:
       MINIO_ROOT_USER: ${MINIO_ROOT_USER}
       MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
-      MINIO_ENDPOINT_CONTAINER: ${MINIO_ENDPOINT_CONTAINER}
     volumes:
       - minio_data:/data
     command: server --console-address ":9090" /data
