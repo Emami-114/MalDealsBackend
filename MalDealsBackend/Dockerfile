@@ -1,8 +1,8 @@
 # Build-Stage mit .NET 9.0 SDK
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
-COPY ./MalDealsBackend ./
 WORKDIR /app
-RUN dotnet restore "MalDealsBackend.csproj"
+COPY . .  
+RUN dotnet restore "./MalDealsBackend.csproj"
 RUN dotnet publish -c Release -o /out  
 
 # Runtime-Stage mit .NET 9.0 Runtime
