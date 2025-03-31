@@ -76,13 +76,13 @@ jobs:
         uses: webfactory/ssh-agent@v0.5.3
         with:
           ssh-private-key: ${{secrets.SSH_PRIVATE_KEY}}
+        
+      - name: Copy docker-compose.prod.yml to VPS
+        run: sshpass -p '${{ secrets.SERVER_PASSWORD }}' scp -o StrictHostKeyChecking=no MalDealsBackend/docker-compose-prod.yml root@${{ secrets.SERVER_HOST }}:~
 
       - name: Copy nginx.conf to VPS
-        run: scp -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa MalDealsBackend/nginx.conf ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}:~
-        
-      - name: Copy docker-compose.prod.yml to vps_server
-        run: scp -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa MalDealsBackend/docker-compose-prod.yml root@${{ secrets.VPS_IP }}:~
-
+        run: sshpass -p '${{ secrets.SERVER_PASSWORD }}' scp -o StrictHostKeyChecking=no MalDealsBackend/nginx.conf root@${{ secrets.SERVER_HOST }}:~
+      
       - name: Deploy
         uses: appleboy/ssh-action@master
         with:
