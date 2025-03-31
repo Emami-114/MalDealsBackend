@@ -29,7 +29,7 @@ services:
     environment:
       - ASPNETCORE_URLS=http://+:5051
       - ASPNETCORE_ENVIRONMENT=Production # Oder "Production" Or "Development"
-      - DATABASE_URL=${DB_CONNECTION_CONTAINER}
+      - DATABASE_URL=${DATABASE_URL}
       - Minio__Endpoint=${MINIO_ENDPOINT_CONTAINER}
       - Minio__AccessKey=${MINIO_ROOT_USER}
       - Minio__SecretKey=${MINIO_ROOT_PASSWORD}
@@ -54,18 +54,18 @@ services:
     networks:
       - maldeals_prod_network
 
- # nginx:
-  #  image: nginx:latest
-   # container_name: nginx_reverse_proxy
-    #ports:
-     # - "80"
-      #- "443"
-    #volumes:
-     # - ./nginx.conf:/etc/nginx/nginx.conf:ro
-    #depends_on:
-     # - maldeals
-    #networks:
-     # - maldeals_prod_network
+  nginx:
+    image: nginx:latest
+    container_name: nginx_reverse_proxy
+    ports:
+      - "80"
+      - "443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - maldeals
+    networks:
+      - maldeals_prod_network
 
 networks:
   maldeals_prod_network:
