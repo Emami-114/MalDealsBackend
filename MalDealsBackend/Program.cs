@@ -36,7 +36,7 @@ builder.Services.AddControllers();
 builder.Services.AddAuthorization();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
-options.UseNpgsql(builder.Configuration.GetConnectionString("Database")));
+options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddSingleton<ConfigManager>(); builder.Services.AddScoped<DealServices>();
 builder.Services.AddScoped<CategoryServices>();
