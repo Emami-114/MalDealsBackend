@@ -26,10 +26,10 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Install .NET SDK
-        uses: actions/setup-dotnet@v3
+        uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '9.0.x'      
       - name: Restore dependencies
@@ -93,7 +93,7 @@ jobs:
         run: sshpass -p '${{ secrets.SERVER_PASSWORD }}' scp -o StrictHostKeyChecking=no MalDealsBackend/Dockerfile root@${{ secrets.SERVER_HOST }}:~
       
       - name: Copy project files to VPS
-        run: sshpass -p '${{ secrets.SERVER_PASSWORD }}' scp -o StrictHostKeyChecking=no -r MalDealsBackend root@${{ secrets.SERVER_HOST }}:~
+        run: sshpass -p '${{ secrets.SERVER_PASSWORD }}' scp -o StrictHostKeyChecking=no -r MalDealsBackend/MalDealsBackend root@${{ secrets.SERVER_HOST }}:~
 
       - name: Deploy
         uses: appleboy/ssh-action@master
