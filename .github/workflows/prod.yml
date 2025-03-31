@@ -54,7 +54,13 @@ jobs:
         run: |
           sudo apt update
           sudo apt install docker-compose -y
-
+      - name: Build and push Docker images
+        uses: docker/bake-action@v2.3.0
+        with:
+          push: true
+          set: |
+            *.cache-from=type=gha
+            *.cache-to=type=gha,mode=max
   deploy:
     needs: build
     runs-on: ubuntu-latest
@@ -86,6 +92,7 @@ jobs:
       - name: Copy nginx.conf to VPS
         run: sshpass -p '${{ secrets.SERVER_PASSWORD }}' scp -o StrictHostKeyChecking=no MalDealsBackend/Dockerfile root@${{ secrets.SERVER_HOST }}:~
       
+
       - name: Deploy
         uses: appleboy/ssh-action@master
         with:
