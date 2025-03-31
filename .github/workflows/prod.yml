@@ -77,7 +77,7 @@ jobs:
         with:
           ssh-private-key: ${{secrets.SSH_PRIVATE_KEY}}
         
-      - name: Copy docker-compose.prod.yml to VPS
+      - name: Copy docker-compose.prod.yml to VPS **
         run: sshpass -p '${{ secrets.SERVER_PASSWORD }}' scp -o StrictHostKeyChecking=no MalDealsBackend/docker-compose-prod.yml root@${{ secrets.SERVER_HOST }}:~
 
       - name: Copy nginx.conf to VPS
