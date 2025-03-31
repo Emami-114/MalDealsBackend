@@ -26,7 +26,7 @@ namespace MalDealsBackend.Services
             // DB-Config initialisieren
             Database = new ConfigModel.DbConfig
             {
-                ConnectionString = GetEnv("DB_CONNECTION_STRING", "Host=localhost;Database=mydb;Username=user;Password=pass"),
+                ConnectionString = GetEnv("DB_CONNECTION_CONTAINER", "default_connection"),
                 DatabaseType = GetEnv("DB_TYPE", "PostgreSQL")
             };
 
