@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+    workflow_dispatch:
 
 jobs:
   build:
@@ -41,6 +42,9 @@ jobs:
       - name: Run tests
         run: dotnet test --configuration Release --no-restore --verbosity normal
       
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+      
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
@@ -58,7 +62,8 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
         with:
-          context: ./MalDealsBackend
+          context: .
+          file: ./MalDealsBackend/Dockerfile
           push: true
           tags: emami114/maldeals:latest
   deploy:
