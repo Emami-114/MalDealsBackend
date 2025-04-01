@@ -37,6 +37,8 @@ services:
       - DATABASE_URL=${DATABASE_URL}
       - Minio__AccessKey=${MINIO_ROOT_USER}
       - Minio__SecretKey=${MINIO_ROOT_PASSWORD}
+      - ADMIN_API_KEY=${ADMIN_API_KEY}
+      - API_KEY_SECRET_KEY=${API_KEY_SECRET_KEY}
     depends_on:
       - postgresdb
       - minio
