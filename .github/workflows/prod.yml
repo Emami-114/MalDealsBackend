@@ -120,6 +120,7 @@ jobs:
             MINIO_ROOT_USER=${{ secrets.MINIO_ROOT_USER }}
             MINIO_ROOT_PASSWORD=${{ secrets.MINIO_ROOT_PASSWORD }}
             MINIO_ENDPOINT_CONTAINER=${{ secrets.MINIO_ENDPOINT_CONTAINER }}
+            API_KEY_SECRET_KEY=${{ secrets.API_KEY_SECRET_KEY }}
             EOF
 
             # Debugging: Prüfen, ob die Datei korrekt erstellt wurde
