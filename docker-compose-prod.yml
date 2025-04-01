@@ -33,11 +33,9 @@ services:
       - ASPNETCORE_ENVIRONMENT=Production # Oder "Production" Or "Development"
       #- DATABASE_URL=${DB_CONNECTION_CONTAINER}
       
-      - ConnectionStrings__DefaultConnection=${DATABASE_URL}
+      - DATABASE_URL=${DATABASE_URL}
       - Minio__AccessKey=${MINIO_ROOT_USER}
       - Minio__SecretKey=${MINIO_ROOT_PASSWORD}
-    env_file:
-      - .env
     depends_on:
       - postgresdb
       - minio
