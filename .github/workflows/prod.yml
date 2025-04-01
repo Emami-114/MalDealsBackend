@@ -87,7 +87,8 @@ jobs:
         uses: webfactory/ssh-agent@v0.5.3
         with:
           ssh-private-key: ${{secrets.SSH_PRIVATE_KEY}}
-        
+      - name: Caddy file to VPS
+        run: sshpass -p '${{ secrets.SERVER_PASSWORD }}' scp -o StrictHostKeyChecking=no Caddyfile root@${{ secrets.SERVER_HOST }}:~
       - name: Copy docker-compose.prod.yml to VPS **
         run: sshpass -p '${{ secrets.SERVER_PASSWORD }}' scp -o StrictHostKeyChecking=no docker-compose-prod.yml root@${{ secrets.SERVER_HOST }}:~
 

@@ -69,9 +69,24 @@ services:
     networks:
       - maldeals_prod_network
 
+  caddy:
+    image: caddy/caddy:latest
+    container_name: caddy
+    restart: unless-stopped
+    ports:
+      - "443:443"
+      - "80:80"
+    volumes:
+      - $PWD/Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+    networks:
+      - maldeals_prod_network
 networks:
   maldeals_prod_network:
 
 volumes:
   minio_data:
   postgres_data:
+  caddy_data:
+  caddy_config:
