@@ -26,6 +26,9 @@ namespace MalDealsBackend.Middleware
                 return;
             }
 
+            if (apiKey == Environment.GetEnvironmentVariable("ADMIN_API_KEY")) {
+                await _next(context);
+            }
 
             if (!_apiKeyService.ValidateApiKey(apiKey, out var deviceId))
             {
