@@ -13,7 +13,7 @@ namespace MalDealsBackend.Middleware
             var path = (context.Request.Path.Value ?? "").ToLower();
             var apiKey = context.Request.Query["api_key"];
 
-            if (path.StartsWith("/scalar") || path.StartsWith("/swagger") || path.StartsWith("/openapi"))
+            if (path.StartsWith("/scalar") || path.StartsWith("/swagger") || path.StartsWith("/openapi") || path.StartsWith("/api/request-api-key"))
             {
                 await _next(context);
                 return;
