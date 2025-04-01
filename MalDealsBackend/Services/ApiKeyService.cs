@@ -49,7 +49,7 @@ namespace MalDealsBackend.Services
 
         public bool ValidateSignature(string deviceId, string timestamp, string signature)
         {
-            string secretKey = "DEIN_GEHEIMER_KEY"; // Sicher speichern (z.B. in appsettings.json)
+            string secretKey = _config.ApiKey.SecretKey; // Sicher speichern (z.B. in appsettings.json)
             string data = $"{deviceId}:{timestamp}";
 
             using var hmac = new HMACSHA256(Encoding.UTF8.GetBytes(secretKey));
