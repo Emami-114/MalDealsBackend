@@ -2,4 +2,5 @@ maldeals.de {
     reverse_proxy maldeals:5051 {
         header_down Strict-Transport-Security max-age=31536000
     }
+    tls emami.114@outlook.de
 }
