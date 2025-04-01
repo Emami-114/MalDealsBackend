@@ -28,6 +28,7 @@ namespace MalDealsBackend.Middleware
 
             if (apiKey == Environment.GetEnvironmentVariable("ADMIN_API_KEY")) {
                 await _next(context);
+                return;
             }
 
             if (!_apiKeyService.ValidateApiKey(apiKey, out var deviceId))
