@@ -41,17 +41,6 @@ jobs:
 
       - name: Run tests
         run: dotnet test --configuration Release --no-restore --verbosity normal
-      - name: Install Docker
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y apt-transport-https ca-certificates curl software-properties-common
-          curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-          sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-          sudo apt-get update
-          sudo apt-get install -y docker-ce docker-ce-cli containerd.io
-
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v1
       
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
@@ -67,6 +56,9 @@ jobs:
           sudo apt update
           sudo apt install docker-compose -y
       
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
         with:
@@ -97,11 +89,12 @@ jobs:
           ssh-private-key: ${{secrets.SSH_PRIVATE_KEY}}
       - name: Caddy file to VPS
         run: sshpass -p '${{ secrets.SERVER_PASSWORD }}' scp -o StrictHostKeyChecking=no Caddyfile root@${{ secrets.SERVER_HOST }}:~
-      #- name: Copy docker-compose.prod.yml to VPS **
-       # run: sshpass -p '${{ secrets.SERVER_PASSWORD }}' scp -o StrictHostKeyChecking=no docker-compose-prod.yml root@${{ secrets.SERVER_HOST }}:~
+      
+      - name: Copy docker-compose.prod.yml to VPS **
+        run: sshpass -p '${{ secrets.SERVER_PASSWORD }}' scp -o StrictHostKeyChecking=no docker-compose-prod.yml root@${{ secrets.SERVER_HOST }}:~
 
-      - name: Copy nginx.conf to VPS
-        run: sshpass -p '${{ secrets.SERVER_PASSWORD }}' scp -o StrictHostKeyChecking=no nginx.conf root@${{ secrets.SERVER_HOST }}:~
+      #- name: Copy nginx.conf to VPS
+       # run: sshpass -p '${{ secrets.SERVER_PASSWORD }}' scp -o StrictHostKeyChecking=no nginx.conf root@${{ secrets.SERVER_HOST }}:~
       
       - name: Copy DockerFile to VPS
         run: sshpass -p '${{ secrets.SERVER_PASSWORD }}' scp -o StrictHostKeyChecking=no MalDealsBackend/Dockerfile root@${{ secrets.SERVER_HOST }}:~
