@@ -109,16 +109,18 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           password: ${{ secrets.SERVER_PASSWORD }}
           script: |
-            cd ~
-            export DATABASE_URL=${{ secrets.DATABASE_URL }}
-            export JWT_SECRET_KEY=${{ secrets.JWT_SECRET_KEY }}
-            export JWT_MAXAGE=${{ secrets.JWT_EXPIRY_MINUTES }}
-            export POSTGRES_USER=${{secrets.POSTGRES_USER}}
-            export POSTGRES_PASSWORD=${{secrets.POSTGRES_PASSWORD}}
-            export POSTGRES_DB=${{secrets.POSTGRES_DB}}
-            export MINIO_ROOT_USER=${{ secrets.MINIO_ROOT_USER }}
-            export MINIO_ROOT_PASSWORD=${{ secrets.MINIO_ROOT_PASSWORD }}
-            export MINIO_ENDPOINT_CONTAINER=${{ secrets.MINIO_ENDPOINT_CONTAINER }}
+            export DATABASE_URL="${{ secrets.DATABASE_URL }}"
+            export JWT_SECRET_KEY="${{ secrets.JWT_SECRET_KEY }}"
+            export JWT_MAXAGE="${{ secrets.JWT_EXPIRY_MINUTES }}"
+            export POSTGRES_USER="${{ secrets.POSTGRES_USER }}"
+            export POSTGRES_PASSWORD="${{ secrets.POSTGRES_PASSWORD }}"
+            export POSTGRES_DB="${{ secrets.POSTGRES_DB }}"
+            export MINIO_ROOT_USER="${{ secrets.MINIO_ROOT_USER }}"
+            export MINIO_ROOT_PASSWORD="${{ secrets.MINIO_ROOT_PASSWORD }}"
+            export MINIO_ENDPOINT_CONTAINER="${{ secrets.MINIO_ENDPOINT_CONTAINER }}"
+      
+            # Überprüfe Umgebungsvariablen
+            echo "DATABASE_URL=${DATABASE_URL}"
             docker-compose down
             docker-compose pull
             docker-compose -f docker-compose-prod.yml up -d
