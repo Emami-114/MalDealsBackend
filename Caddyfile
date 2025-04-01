@@ -1,3 +1,7 @@
+www.maldeals.de {
+    redir https://maldeals.de{uri} permanent
+}
+
 maldeals.de {
     reverse_proxy maldeals:5051 {
         header_down Strict-Transport-Security max-age=31536000
