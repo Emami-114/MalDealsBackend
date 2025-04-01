@@ -33,7 +33,7 @@ services:
       - ASPNETCORE_ENVIRONMENT=Production # Oder "Production" Or "Development"
       #- DATABASE_URL=${DB_CONNECTION_CONTAINER}
       
-      - ConnectionStrings__DefaultConnection=postgresql://malDeals:70d489eaa7ca4f85ba2d@postgres:5432/deals_db?schema=public
+      - ConnectionStrings__DefaultConnection=postgresql://malDeals:70d489eaa7ca4f85ba2d@postgres:5432/deals_db
       - Minio__AccessKey=${MINIO_ROOT_USER}
       - Minio__SecretKey=${MINIO_ROOT_PASSWORD}
 
