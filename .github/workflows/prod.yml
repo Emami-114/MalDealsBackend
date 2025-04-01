@@ -89,7 +89,6 @@ jobs:
           ssh-private-key: ${{secrets.SSH_PRIVATE_KEY}}
       - name: Caddy file to VPS
         run: sshpass -p '${{ secrets.SERVER_PASSWORD }}' scp -o StrictHostKeyChecking=no Caddyfile root@${{ secrets.SERVER_HOST }}:~
-      
       - name: Copy docker-compose.prod.yml to VPS **
         run: sshpass -p '${{ secrets.SERVER_PASSWORD }}' scp -o StrictHostKeyChecking=no docker-compose-prod.yml root@${{ secrets.SERVER_HOST }}:~
 
@@ -109,18 +108,24 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           password: ${{ secrets.SERVER_PASSWORD }}
           script: |
-            export DATABASE_URL="${{ secrets.DATABASE_URL }}"
-            export JWT_SECRET_KEY="${{ secrets.JWT_SECRET_KEY }}"
-            export JWT_MAXAGE="${{ secrets.JWT_EXPIRY_MINUTES }}"
-            export POSTGRES_USER="${{ secrets.POSTGRES_USER }}"
-            export POSTGRES_PASSWORD="${{ secrets.POSTGRES_PASSWORD }}"
-            export POSTGRES_DB="${{ secrets.POSTGRES_DB }}"
-            export MINIO_ROOT_USER="${{ secrets.MINIO_ROOT_USER }}"
-            export MINIO_ROOT_PASSWORD="${{ secrets.MINIO_ROOT_PASSWORD }}"
-            export MINIO_ENDPOINT_CONTAINER="${{ secrets.MINIO_ENDPOINT_CONTAINER }}"
-      
-            # Überprüfe Umgebungsvariablen
-            echo "DATABASE_URL=${DATABASE_URL}"
+            cd ~
+            # Erstelle die .env-Datei mit den Umgebungsvariablen
+            cat <<EOF > .env
+            DATABASE_URL=${{ secrets.DATABASE_URL }}
+            JWT_SECRET_KEY=${{ secrets.JWT_SECRET_KEY }}
+            JWT_MAXAGE=${{ secrets.JWT_EXPIRY_MINUTES }}
+            POSTGRES_USER=${{ secrets.POSTGRES_USER }}
+            POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}
+            POSTGRES_DB=${{ secrets.POSTGRES_DB }}
+            MINIO_ROOT_USER=${{ secrets.MINIO_ROOT_USER }}
+            MINIO_ROOT_PASSWORD=${{ secrets.MINIO_ROOT_PASSWORD }}
+            MINIO_ENDPOINT_CONTAINER=${{ secrets.MINIO_ENDPOINT_CONTAINER }}
+            EOF
+
+            # Debugging: Prüfen, ob die Datei korrekt erstellt wurde
+            echo "Inhalt der .env-Datei:"
+            cat .env
+
             docker-compose down
             docker-compose pull
             docker-compose -f docker-compose-prod.yml up -d
