@@ -27,10 +27,6 @@ namespace MalDealsBackend.Services
         public bool ValidateApiKey(string? apiKey, out string deviceId)
         {
             deviceId = string.Empty;
-
-            if (apiKey == _config.ApiKey.SecretKey) {
-                return true;
-                } else {
             if (string.IsNullOrEmpty(apiKey)) { return false; }
             var parts = apiKey.Split(':');
             if (parts.Length != 3) return false; // API-Key muss 3 Teile haben!
@@ -48,7 +44,6 @@ namespace MalDealsBackend.Services
             .Replace("=", "");
 
             return expectedHash == signature;
-            }
         }
 
 
