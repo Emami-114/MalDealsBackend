@@ -5,9 +5,9 @@ services:
     container_name: postgresdb
     restart: always
     environment:
-      - POSTGRES_USER=dealsdbuser
-      - POSTGRES_PASSWORD=70d489eaa7ca4f85ba2d
-      - POSTGRES_DB=dealsdb
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
     ports:
       - "5432:5432"
     healthcheck:
@@ -33,7 +33,6 @@ services:
     environment:
       - ASPNETCORE_URLS=http://+:5051
       - ASPNETCORE_ENVIRONMENT=Production # Oder "Production" Or "Development"
-      #- DATABASE_URL=${DB_CONNECTION_CONTAINER}
       - ConnectionStrings__DefaultConnection=${DATABASE_URL}
       - DATABASE_URL=${DATABASE_URL}
       - Minio__AccessKey=${MINIO_ROOT_USER}
