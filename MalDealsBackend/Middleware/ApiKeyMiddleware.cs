@@ -26,7 +26,7 @@ namespace MalDealsBackend.Middleware
                 return;
             }
 
-            if (apiKey == Environment.GetEnvironmentVariable("ADMIN_API_KEY")) {
+            if (apiKey == Environment.GetEnvironmentVariable("API_KEY_SECRET_KEY")) {
                 await _next(context);
                 return;
             }
