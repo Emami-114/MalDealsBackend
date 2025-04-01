@@ -28,6 +28,7 @@ namespace MalDealsBackend.Services
         {
             deviceId = string.Empty;
             if (string.IsNullOrEmpty(apiKey)) { return false; }
+            if (apiKey == _config.ApiKey.SecretKey) {return true;}
             var parts = apiKey.Split(':');
             if (parts.Length != 3) return false; // API-Key muss 3 Teile haben!
 
