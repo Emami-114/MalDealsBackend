@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using MalDealsBackend.Models;
 using MalDealsBackend.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MalDealsBackend.Controllers
@@ -15,6 +16,7 @@ namespace MalDealsBackend.Controllers
         private readonly ApiKeyService _service = service;
         private readonly ILogger<ApiKeyController> _logger = logger;
 
+        [AllowAnonymous]
         [HttpPost]
         public IActionResult RequestApiKey([FromBody] ApiKeyRequestModel apiKeyModel)
         {
