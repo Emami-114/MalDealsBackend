@@ -16,7 +16,6 @@ namespace MalDealsBackend.Controllers
         private readonly DealServices _dealServices = dealServices;
 
         [HttpGet]
-        [Authorize]
         public async Task<ActionResult> GetDeals([FromQuery] DealFilterQuery query)
         {
             try

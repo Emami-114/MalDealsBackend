@@ -60,6 +60,7 @@ if (app.Environment.IsDevelopment() || app.Environment.IsStaging() || app.Enviro
     app.UseSwaggerUIConfiguration();
     app.MapScalarApiReference("/scalar");
 }
+Console.WriteLine(apiKeyService.ApiKeyGenerator("MyDevice"));
 
 app.UseMiddleware<ApiKeyMiddleware>();
 
