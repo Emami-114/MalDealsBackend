@@ -32,3 +32,5 @@ Ein .NET 9 Web API-Projekt mit PostgreSQL, Entity Framework Core, JWT-Authentifi
 5. **Swagger-Dokumentation öffnen Local**
     ```sh
     Gehe zu: http://localhost:5000/swagger.
+
+<img src="asset/backend.png" alt="Beschreibung des Bildes" width="400"/>
