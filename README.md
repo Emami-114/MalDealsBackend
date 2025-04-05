@@ -33,4 +33,4 @@ Ein .NET 9 Web API-Projekt mit PostgreSQL, Entity Framework Core, JWT-Authentifi
     ```sh
     Gehe zu: http://localhost:5000/swagger.
 
-<img src="asset/backend.png" alt="Beschreibung des Bildes" width="400"/>
+<img src="portfolio-emami/asset/backend.png" alt="Beschreibung des Bildes" width="400"/>
