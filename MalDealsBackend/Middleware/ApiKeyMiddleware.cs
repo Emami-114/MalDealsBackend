@@ -26,11 +26,6 @@ namespace MalDealsBackend.Middleware
                 return;
             }
 
-            if (apiKey == Environment.GetEnvironmentVariable("API_KEY_SECRET_KEY")) {
-                await _next(context);
-                return;
-            }
-
             if (!_apiKeyService.ValidateApiKey(apiKey, out var deviceId))
             {
                 context.Response.StatusCode = 403;

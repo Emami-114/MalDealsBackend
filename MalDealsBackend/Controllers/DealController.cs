@@ -21,8 +21,8 @@ namespace MalDealsBackend.Controllers
             try
             {
                 IEnumerable<DealEntity> deals = await _dealServices.GetDealsAsync(query);
-                string json = JsonUtils.Serialize(deals);
-                return Ok(json);
+                var dealsDto = DealModelDto.ToDtos(deals); 
+                return Ok(dealsDto);
             }
             catch (Exception e)
             {
@@ -42,8 +42,8 @@ namespace MalDealsBackend.Controllers
                 {
                     return NotFound();
                 }
-                string json = JsonUtils.Serialize(dealModel);
-                return Ok(json);
+                var dto = DealDetailModelDto.ToDto(dealModel);
+                return Ok(dto);
             }
             catch (Exception e)
             {
