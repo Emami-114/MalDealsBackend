@@ -4,3 +4,7 @@ api.maldeals.de {
     }
     tls emami.114@outlook.de
 }
+
+miostor.maldeals.de {
+    reverse_proxy minio:9090
+}

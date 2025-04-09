@@ -31,7 +31,7 @@ namespace MalDealsBackend.Controllers
                 }
 
                 await _minioService.UploadFileAsync(bucketName, file);
-                var fileNameWithBucket = $"{bucketName}:{file.FileName}";
+                var fileNameWithBucket = $"{bucketName}{file.FileName}";
                 return Created("", fileNameWithBucket);
             }
             catch (Exception e)
