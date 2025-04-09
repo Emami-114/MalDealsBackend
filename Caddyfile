@@ -6,5 +6,9 @@ api.maldeals.de {
 }
 
 miostor.maldeals.de {
-    reverse_proxy minio:9090
+    reverse_proxy minio:9090 {
+                header_down Strict-Transport-Security max-age=31536000
+    }
+
+        tls emami.114@outlook.de
 }
