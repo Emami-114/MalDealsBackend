@@ -9,6 +9,7 @@ namespace MalDealsBackend.Services
         public ConfigModel.DbConfig Database { get; private set; }
         public ConfigModel.ApiKeyConfig ApiKey { get; private set; }
 
+        public ConfigModel.MinioConfig Minio {get; private set; }
         public ConfigManager()
         {
             // .env Datei laden
@@ -33,6 +34,11 @@ namespace MalDealsBackend.Services
             ApiKey = new ConfigModel.ApiKeyConfig
             {
                 SecretKey = GetEnv("API_KEY_SECRET_KEY","default-secret")
+            };
+
+            Minio = new ConfigModel.MinioConfig {
+                AccessKey = GetEnv("MINIO_ROOT_USER","default"),
+                SecretKey = GetEnv("MINIO_ROOT_PASSWORD","default")
             };
 
         }
