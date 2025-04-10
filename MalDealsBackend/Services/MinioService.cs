@@ -12,7 +12,7 @@ namespace MalDealsBackend.Services
         {
             _config = config;
             _minioClient = new MinioClient()
-                .WithEndpoint("localhost", 9000)
+                .WithEndpoint("minio", 9000)
                 .WithCredentials(_config.Minio.AccessKey, _config.Minio.SecretKey)
                 .Build();
         }
