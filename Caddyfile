@@ -1,8 +1,12 @@
+{
+    acme_ca https://acme-staging-v02.api.letsencrypt.org/directory
+}
+
 api.maldeals.de {
     reverse_proxy maldeals:5051 {
         header_down Strict-Transport-Security "max-age=31536000; includeSubDomains"
     }
-    tls ab.emami1140@gmail.com
+    tls emami.114@outlook.de
 }
 
 miostor.maldeals.de {
@@ -12,5 +16,5 @@ miostor.maldeals.de {
     reverse_proxy /data/* minio:9000 {
         header_down Strict-Transport-Security "max-age=31536000; includeSubDomains"
     }
-    tls ab.emami1140@gmail.com
+    tls emami.114@outlook.de
 }
