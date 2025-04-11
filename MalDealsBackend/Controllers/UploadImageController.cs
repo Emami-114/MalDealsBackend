@@ -31,7 +31,8 @@ namespace MalDealsBackend.Controllers
                 }
 
                 await _minioService.UploadFileAsync(bucketName, file);
-                var fileNameWithBucket = $"{bucketName}.{file.FileName}";
+                var fileName = file.FileName.Replace(" ","-") ;
+                var fileNameWithBucket = $"{bucketName}/{fileName}";
                 return Created("", fileNameWithBucket);
             }
             catch (Exception e)
@@ -66,7 +67,7 @@ namespace MalDealsBackend.Controllers
         {
             try
             {
-                var split = filePath.Split(".");
+                var split = filePath.Split("/");
                 var fileUrl = await _minioService.GetPresignedUrlAsync(split[0], split[1]);
                 return Ok(fileUrl);
             }
@@ -82,7 +83,7 @@ namespace MalDealsBackend.Controllers
         {
             try
             {
-                var split = filePath.Split(".");
+                var split = filePath.Split("/");
                 bool success = await _minioService.DeleteFileAsync(split[0], split[1]);
                 if (success)
                 {

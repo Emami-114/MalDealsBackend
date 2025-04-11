@@ -24,11 +24,12 @@ namespace MalDealsBackend.Services
             {
                 await _minioClient.MakeBucketAsync(new MakeBucketArgs().WithBucket(bucketName));
             }
+            var fileName = file.FileName.Replace(" ","-") ;
             IsAllowedImageType(file);
             using var stream = file.OpenReadStream();
             var args = new PutObjectArgs()
             .WithBucket(bucketName)
-            .WithObject(file.FileName)
+            .WithObject(fileName)
             .WithStreamData(stream)
             .WithObjectSize(file.Length)
             .WithContentType(file.ContentType);
@@ -47,8 +48,7 @@ namespace MalDealsBackend.Services
             {
                 IsAllowedImageType(file);
                 using var stream = file.OpenReadStream();
-                var fileName = file.FileName;
-
+                var fileName = file.FileName.Replace(" ","-");
                 var putObjectArgs = new PutObjectArgs()
                 .WithBucket(bucketName)
                 .WithObject(fileName)
@@ -56,7 +56,7 @@ namespace MalDealsBackend.Services
                 .WithObjectSize(file.Length)
                 .WithContentType(file.ContentType);
                 await _minioClient.PutObjectAsync(putObjectArgs);
-                return $"{bucketName}.{fileName}";
+                return $"{bucketName}/{fileName}";
             });
             return [.. (await Task.WhenAll(uploadTasks))];
         }
