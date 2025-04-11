@@ -9,12 +9,12 @@ namespace MalDealsBackend.Controllers
 {
     [ApiController]
     [Route("api/images")]
-    public class ImageController : ControllerBase
+    public class UploadImageController : ControllerBase
     {
         private readonly MinioService _minioService;
-        private readonly ILogger<ImageController> _logger;
+        private readonly ILogger<UploadImageController> _logger;
 
-        public ImageController(MinioService minioService, ILogger<ImageController> logger)
+        public UploadImageController(MinioService minioService, ILogger<UploadImageController> logger)
         {
             _minioService = minioService;
             _logger = logger;
