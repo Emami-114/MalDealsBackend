@@ -28,7 +28,7 @@ namespace MalDealsBackend.Services
             new Claim(ClaimTypes.Name, userName),
             new Claim(ClaimTypes.Role, userRole)
         }),
-                Expires = DateTime.UtcNow.AddMinutes(120),
+                Expires = DateTime.UtcNow.AddDays(14),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(_key), SecurityAlgorithms.HmacSha256Signature),
                 Issuer = _issuer,
                 Audience = _audience

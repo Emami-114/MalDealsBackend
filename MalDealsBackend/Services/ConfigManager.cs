@@ -21,7 +21,7 @@ namespace MalDealsBackend.Services
                 SecretKey = GetEnv("JWT_SECRET_KEY", "default-secret"),
                 Issuer = GetEnv("JWT_ISSUER", "default-issuer"),
                 Audience = GetEnv("JWT_AUDIENCE", "default-audience"),
-                TokenExpiryMinutes = int.TryParse(GetEnv("JWT_EXPIRY_MINUTES", "60"), out var expiry) ? expiry : 60
+                TokenExpiryMinutes = int.TryParse(GetEnv("JWT_EXPIRY_MINUTES", "20160"), out var expiry) ? expiry : 20160
             };
 
             // DB-Config initialisieren
