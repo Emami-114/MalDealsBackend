@@ -6,13 +6,17 @@ api.maldeals.de {
 }
 
 miostor.maldeals.de {
+    tls emami.114@outlook.de
+
     reverse_proxy /admin/* minio:9090 {
-        header_down Strict-Transport-Security max-age=31536000
+        header_down Strict-Transport-Security "max-age=31536000; includeSubDomains"
     }
 
     reverse_proxy /data/* minio:9000 {
-        header_down Strict-Transport-Security max-age=31536000
+        header_down Strict-Transport-Security "max-age=31536000; includeSubDomains"
     }
 
-    tls emami.114@outlook.de
+    handle_errors {
+        respond "{http.error.status_code} {http.error.status_text}" 500
+    }
 }
