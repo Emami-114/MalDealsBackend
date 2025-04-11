@@ -6,11 +6,13 @@ api.maldeals.de {
 }
 
 miostor.maldeals.de {
-    reverse_proxy minio:9090 {
+    # Reverse Proxy für die Admin-UI von MinIO auf Port 9090
+    reverse_proxy /admin/* minio:9090 {
         header_down Strict-Transport-Security max-age=31536000
     }
-    
-    reverse_proxy minio:9000 {
+
+    # Reverse Proxy für den Datenzugriff von MinIO auf Port 9000
+    reverse_proxy /data/* minio:9000 {
         header_down Strict-Transport-Security max-age=31536000
     }
 
