@@ -56,7 +56,7 @@ namespace MalDealsBackend.Services
                 .WithObjectSize(file.Length)
                 .WithContentType(file.ContentType);
                 await _minioClient.PutObjectAsync(putObjectArgs);
-                return $"{bucketName}/{fileName}";
+                return $"{bucketName}.{fileName}";
             });
             return [.. (await Task.WhenAll(uploadTasks))];
         }
