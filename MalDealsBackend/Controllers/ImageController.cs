@@ -8,13 +8,13 @@ using Microsoft.AspNetCore.Mvc;
 namespace MalDealsBackend.Controllers
 {
     [ApiController]
-    [Route("api/upload")]
-    public class UploadImageController : ControllerBase
+    [Route("api/images")]
+    public class ImageController : ControllerBase
     {
         private readonly MinioService _minioService;
-        private readonly ILogger<UploadImageController> _logger;
+        private readonly ILogger<ImageController> _logger;
 
-        public UploadImageController(MinioService minioService, ILogger<UploadImageController> logger)
+        public ImageController(MinioService minioService, ILogger<ImageController> logger)
         {
             _minioService = minioService;
             _logger = logger;
@@ -62,8 +62,8 @@ namespace MalDealsBackend.Controllers
             }
         }
 
-        [HttpGet("{filePath}")]
-        public async Task<IActionResult> GetFileUrlByFileName(string filePath)
+        [HttpGet("{bucketName}/{filePath}")]
+        public async Task<IActionResult> GetFileUrlByFileName(string bucketName,string filePath)
         {
             try
             {
@@ -78,8 +78,8 @@ namespace MalDealsBackend.Controllers
             }
         }
 
-        [HttpDelete("{filePath}")]
-        public async Task<IActionResult> DeleteFile(string filePath)
+        [HttpDelete("{bucketName}/{filePath}")]
+        public async Task<IActionResult> DeleteFile(string bucketName,string filePath)
         {
             try
             {
