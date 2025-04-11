@@ -62,7 +62,7 @@ namespace MalDealsBackend.Controllers
             }
         }
 
-        [HttpGet("{bucketName}/{filePath}")]
+        [HttpGet("{bucketName}/{**filePath}")]
         public async Task<IActionResult> GetFileUrlByFileName(string bucketName,string filePath)
         {
             try
@@ -78,7 +78,7 @@ namespace MalDealsBackend.Controllers
             }
         }
 
-        [HttpDelete("{bucketName}/{filePath}")]
+        [HttpDelete("{bucketName}/{**filePath}")]
         public async Task<IActionResult> DeleteFile(string bucketName,string filePath)
         {
             try
