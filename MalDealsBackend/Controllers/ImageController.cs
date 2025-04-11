@@ -67,8 +67,7 @@ namespace MalDealsBackend.Controllers
         {
             try
             {
-                var split = filePath.Split("/");
-                var fileUrl = await _minioService.GetPresignedUrlAsync(split[0], split[1]);
+                var fileUrl = await _minioService.GetPresignedUrlAsync(bucketName, filePath);
                 return Ok(fileUrl);
             }
             catch (Exception e)
@@ -83,8 +82,7 @@ namespace MalDealsBackend.Controllers
         {
             try
             {
-                var split = filePath.Split("/");
-                bool success = await _minioService.DeleteFileAsync(split[0], split[1]);
+                bool success = await _minioService.DeleteFileAsync(bucketName, filePath);
                 if (success)
                 {
                     return NoContent();
