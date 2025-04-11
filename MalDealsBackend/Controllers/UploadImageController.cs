@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace MalDealsBackend.Controllers
 {
     [ApiController]
-    [Route("api/images")]
+    [Route("api/upload")]
     public class UploadImageController : ControllerBase
     {
         private readonly MinioService _minioService;
