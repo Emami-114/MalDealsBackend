@@ -64,8 +64,9 @@ jobs:
         with:
           context: .
           file: ./MalDealsBackend/Dockerfile
-          push: true
+          push: false
           tags: emami114/maldeals:latest
+          no-cache: true
   deploy:
     needs: build
     runs-on: ubuntu-latest
