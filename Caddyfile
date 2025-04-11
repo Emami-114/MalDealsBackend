@@ -6,10 +6,14 @@ api2.maldeals.de {
 }
 
 miostor2.maldeals.de {
-    reverse_proxy /admin/* minio:9090 {
+    reverse_proxy minio:9090 {
         header_down Strict-Transport-Security "max-age=31536000; includeSubDomains"
     }
-    reverse_proxy /data/* minio:9000 {
+  
+    tls ab.emami1140@gmail.com
+}
+minio.maldeals.de {
+      reverse_proxy minio:9000 {
         header_down Strict-Transport-Security "max-age=31536000; includeSubDomains"
     }
     tls ab.emami1140@gmail.com
