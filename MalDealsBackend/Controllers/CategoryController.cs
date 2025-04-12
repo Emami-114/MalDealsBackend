@@ -18,7 +18,10 @@ namespace MalDealsBackend.Controllers
             try
             {
                 IEnumerable<CategoryEntity> categories = await _service.GetCategoriesAsync();
-                return Ok(categories);
+                var categoriesDto = categories.Select(category => 
+                    CategoryModelDto.ToDto(category)
+                );
+                return Ok(categoriesDto);
             }
             catch (Exception e)
             {
@@ -37,7 +40,7 @@ namespace MalDealsBackend.Controllers
                 {
                     return NotFound();
                 }
-                return Ok(category);
+                return Ok(CategoryModelDto.ToDto(category));
             }
             catch (System.Exception e)
             {

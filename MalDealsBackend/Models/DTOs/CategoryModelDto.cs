@@ -14,7 +14,18 @@ namespace MalDealsBackend.Models.DTOs
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
         public bool IsMainCategory => ParentCategoryId == null;
-    };
+
+        public static CategoryModelDto ToDto(CategoryEntity category) => new() {
+            Id = category.Id,
+            Title = category.Title,
+            Thumbnail = category.Thumbnail,
+            IsPublic = category.IsPublic,
+            SubCategoryIds = category.SubCategoryIds,
+            ParentCategoryId = category.ParentCategoryId,
+            CreatedAt = category.CreatedAt,
+            UpdatedAt = category.UpdatedAt
+        };
+    }
 
     public record CreateCategoryModelDto
     {
