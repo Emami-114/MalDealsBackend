@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace MalDealsBackend.Controllers
 {
     [ApiController]
-    [Route("api/catgories")]
+    [Route("api/categories")]
     public class CategoryController(CategoryServices service, ILogger<CategoryController> logger) : ControllerBase
     {
         private readonly CategoryServices _service = service;
