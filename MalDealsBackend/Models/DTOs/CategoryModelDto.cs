@@ -2,14 +2,27 @@ using MalDealsBackend.Models.Entitys;
 
 namespace MalDealsBackend.Models.DTOs
 {
+
+    public record CategoryModelDto
+    {
+        public Guid Id {get; init;}
+        public required string Title { get; init; }
+        public string? Thumbnail { get; init; }
+        public bool IsPublic { get; init; } = true;
+        public string[]? SubCategoryIds { get; init; }
+        public Guid? ParentCategoryId { get; init; }
+        public DateTime CreatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
+        public bool IsMainCategory => ParentCategoryId == null;
+    };
+
     public record CreateCategoryModelDto
     {
         public required string Title { get; init; }
         public string? Thumbnail { get; init; }
         public bool IsPublic { get; init; } = true;
         public string[]? SubCategoryIds { get; init; }
-
-
+        public Guid? ParentCategoryId { get; init; }
         public CategoryEntity ToCategoryEntity() => new()
         {
             Title = Title,

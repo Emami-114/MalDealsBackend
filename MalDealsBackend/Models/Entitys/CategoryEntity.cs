@@ -21,6 +21,8 @@ namespace MalDealsBackend.Models.Entitys
         public bool IsPublic { get; set; } = true;
         [Column("sub_category_ids")]
         public string[]? SubCategoryIds { get; set; }
+        [Column("parent_category_id")]
+        public Guid? ParentCategoryId { get; set; }
         [Column("created_at", TypeName = "TIMESTAMP WITH TIME ZONE")]
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         [Column("updated_at", TypeName = "TIMESTAMP WITH TIME ZONE")]
