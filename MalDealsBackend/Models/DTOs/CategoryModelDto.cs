@@ -40,6 +40,7 @@ namespace MalDealsBackend.Models.DTOs
             Thumbnail = Thumbnail,
             IsPublic = IsPublic,
             SubCategoryIds = SubCategoryIds,
+            ParentCategoryId = ParentCategoryId
         };
     }
 
@@ -48,7 +49,8 @@ namespace MalDealsBackend.Models.DTOs
          string Title,
          string? Thumbnail,
          bool IsPublic,
-         string[]? SubCategoryIds
+         string[]? SubCategoryIds,
+         Guid? ParentCategoryId
     ) {
          public CategoryEntity ToCategoryEntity(CategoryEntity category) => new()
         {
@@ -57,6 +59,7 @@ namespace MalDealsBackend.Models.DTOs
             Thumbnail = Thumbnail,
             IsPublic = IsPublic,
             SubCategoryIds = SubCategoryIds,
+            ParentCategoryId = ParentCategoryId,
             CreatedAt = category.CreatedAt,
             UpdatedAt = DateTime.UtcNow
         };
