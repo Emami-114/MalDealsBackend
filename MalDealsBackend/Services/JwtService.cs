@@ -19,13 +19,13 @@ namespace MalDealsBackend.Services
 
         }
 
-        public string GenerateToken(string userName, string userRole)
+        public string GenerateToken(Guid userId, string userRole)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new[] {
-            new Claim(ClaimTypes.Name, userName),
+            new Claim("userId", userId.ToString()),
             new Claim(ClaimTypes.Role, userRole)
         }),
                 Expires = DateTime.UtcNow.AddDays(14),

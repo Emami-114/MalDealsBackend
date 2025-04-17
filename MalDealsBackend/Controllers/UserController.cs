@@ -1,3 +1,4 @@
+using MalDealsBackend.Models.DTOs;
 using MalDealsBackend.Models.Entitys;
 using MalDealsBackend.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -17,7 +18,30 @@ namespace MalDealsBackend.Controllers
             try
             {
                 IEnumerable<UserDataEntity> users = await _services.GetUsersDataAsync();
-                return Ok(users);
+                return Ok(UserDataModelDto.ToDtos(users));
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
+            }
+        }
+
+        [HttpGet("me")]
+        public async Task<IActionResult> GetMe()
+        {
+            try
+            {
+                var userIdClaim = User.Claims.FirstOrDefault(c => c.Type == "userId");
+                if (userIdClaim == null) return Unauthorized("User ID not found in token.");
+
+                if (!Guid.TryParse(userIdClaim.Value, out Guid userId))
+                    return BadRequest("Invalid user ID in token.");
+
+                var user = await _services.GetUserDataByIdAsync(userId);
+                if (user == null) return NotFound();
+
+                return Ok(UserDataModelDto.ToDto(user));
             }
             catch (Exception e)
             {
@@ -36,7 +60,7 @@ namespace MalDealsBackend.Controllers
                 {
                     return NotFound();
                 }
-                return Ok(user);
+                return Ok(UserDataModelDto.ToDto(user));
             }
             catch (Exception e)
             {

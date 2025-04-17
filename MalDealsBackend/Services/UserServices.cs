@@ -62,6 +62,20 @@ namespace MalDealsBackend.Services
             await _dbContext.SaveChangesAsync();
         }
 
+        public async Task UpdateUserVerifiedAsync(string email,bool verified){
+            var user = await _dbContext.Users.Where(x => x.Email.ToLower() == email.ToLower()).AsNoTracking().FirstOrDefaultAsync();
+            var userData = await _dbContext.UserData.Where(x => x.Email.ToLower() == email.ToLower()).AsNoTracking().FirstOrDefaultAsync();
+            if(user == null || userData == null ) throw new Exception("user not found");
+
+            user.Verified = verified;
+            userData.Verified = verified;
+            userData.UpdatedAt = DateTime.UtcNow;
+
+            _dbContext.Users.Update(user);
+            _dbContext.UserData.Update(userData);
+            await _dbContext.SaveChangesAsync();
+        }
+
         public async Task<bool> IsExistsUserByEmailAsync(string email)
         {
             return await _dbContext.Users.AnyAsync(x => x.Email.ToLower() == email.ToLower());

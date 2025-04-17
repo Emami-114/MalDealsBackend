@@ -63,7 +63,7 @@ namespace MalDealsBackend.Controllers
                     return NotFound();
                 }
 
-                var token = _jwtService.GenerateToken(user.Name, user.Role);
+                var token = _jwtService.GenerateToken(user.Id, user.Role);
                 return Ok(token);
             }
             catch (Exception e)
