@@ -5,13 +5,13 @@ using Microsoft.AspNetCore.Mvc;
 namespace MalDealsBackend.Controllers
 {
     [ApiController]
-    [Route("api/marketDeal")]
+    [Route("api/marked-deals")]
     public class MarketDealController(MarketDealServices services, ILogger<MarketDealController> logger) : ControllerBase
     {
         private readonly MarketDealServices _services = services;
         private readonly ILogger<MarketDealController> _logger = logger;
 
-        [HttpGet("{id}")]
+        [HttpGet("user/{id}")]
         public async Task<IActionResult> GetMarketDealByUserId(Guid id)
         {
             try
@@ -41,7 +41,7 @@ namespace MalDealsBackend.Controllers
             }
         }
 
-        [HttpDelete("deal/{dealId}/user/{userId}")]
+        [HttpDelete("user/{userId}/deal/{dealId}")]
         public async Task<IActionResult> DeleteMarketDealByUser(Guid dealId, Guid userId)
         {
             try
