@@ -8,6 +8,9 @@ namespace MalDealsBackend.Models.Entitys
     public class UserMarketDealEntity
     {
         [Key]
+        [Column("id")]
+        public Guid Id {get; set;} = Guid.NewGuid();
+        
         [Column("user_id")]
         [Required]
         public required Guid UserId { get; set; }

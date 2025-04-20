@@ -40,5 +40,8 @@ namespace MalDealsBackend.Services
             }
         }
 
+        public async Task<bool> IsMarketDealExistst(Guid userId,Guid dealId) {
+         return await _dbContext.UserMarketDeals.AnyAsync(x => x.UserId == userId && x.DealId == dealId);
+        }
     }
 }

@@ -31,6 +31,10 @@ namespace MalDealsBackend.Controllers
         {
             try
             {
+                var exists = await _services.IsMarketDealExistst(marketDeal.UserId,marketDeal.DealId);
+                
+                if (exists) return Conflict("Deal already marked");
+                
                 UserMarketDealEntity userMarketDeal = await _services.CreateUserMarketAsync(marketDeal);
                 return Created("", userMarketDeal);
             }
