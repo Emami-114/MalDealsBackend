@@ -14,3 +14,12 @@ watch:
 
 run:
 	dotnet run
+
+allContainerRemove:
+	docker rm -f $(docker ps -aq)
+
+allImageRemove:
+	docker rmi -f $(docker images -aq)
+
+allDockerVolumeRemove:
+	docker volume prune -f
