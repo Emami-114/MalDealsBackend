@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MalDealsBackend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250421130040_InitialCreate")]
+    [Migration("20250421131449_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -177,7 +177,8 @@ namespace MalDealsBackend.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
 
                     b.Property<Guid>("DealId")
                         .HasColumnType("uuid")

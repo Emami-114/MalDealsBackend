@@ -34,13 +34,13 @@ namespace MalDealsBackend.Migrations
                 name: "deal_vote",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
                     deal_id = table.Column<Guid>(type: "uuid", nullable: false),
                     user_id = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_deal_vote", x => x.Id);
+                    table.PrimaryKey("PK_deal_vote", x => x.id);
                 });
 
             migrationBuilder.CreateTable(

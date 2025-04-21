@@ -8,6 +8,7 @@ namespace MalDealsBackend.Models.Entitys
     public class DealVoteEntity
     {
         [Key]
+        [Column("id")]
         public Guid Id {get; set;} = Guid.NewGuid();
         [Column("deal_id")]
         public Guid DealId { get; set; }
