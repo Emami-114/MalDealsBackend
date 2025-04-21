@@ -14,6 +14,7 @@ namespace MalDealsBackend.Models.DTOs
     string? UserId,
     string? CouponCode,
     string? ExpirationDate,
+    int VoteCount,
     DateTime UpdatedAt
     ) 
     {
@@ -31,6 +32,7 @@ namespace MalDealsBackend.Models.DTOs
                 deal.UserId,
                 deal.CouponCode,
                 deal.ExpirationDate,
+                deal.VoteCount,
                 deal.UpdatedAt
             ));
         }
@@ -55,6 +57,7 @@ namespace MalDealsBackend.Models.DTOs
     string? CouponCode,
     bool IsPublish,
     string? ExpirationDate,
+    int VoteCount,
     DateTime CreatedAt,
     DateTime UpdatedAt
     )
@@ -79,6 +82,7 @@ namespace MalDealsBackend.Models.DTOs
             CouponCode = CouponCode,
             IsPublish = IsPublish,
             ExpirationDate = ExpirationDate,
+            VoteCount = VoteCount,
             CreatedAt = CreatedAt,
             UpdatedAt = UpdatedAt
         };
@@ -104,6 +108,7 @@ namespace MalDealsBackend.Models.DTOs
                 deal.CouponCode,
                 deal.IsPublish,
                 deal.ExpirationDate,
+                deal.VoteCount,
                 deal.CreatedAt,
                 deal.UpdatedAt
             );
@@ -128,7 +133,8 @@ namespace MalDealsBackend.Models.DTOs
     string? VideoUrl,
     string? CouponCode,
     bool IsPublish,
-    string? ExpirationDate
+    string? ExpirationDate,
+    int VoteCount
     )
     {
         public DealEntity ToModel() => new()
@@ -149,7 +155,8 @@ namespace MalDealsBackend.Models.DTOs
             VideoUrl = VideoUrl,
             CouponCode = CouponCode,
             IsPublish = IsPublish,
-            ExpirationDate = ExpirationDate
+            ExpirationDate = ExpirationDate,
+            VoteCount = VoteCount
         };
     };
     public record UpdateDealModelDto
@@ -170,7 +177,8 @@ namespace MalDealsBackend.Models.DTOs
     string? VideoUrl,
     string? CouponCode,
     bool IsPublish,
-    string? ExpirationDate
+    string? ExpirationDate,
+    int VoteCount
     )
     {
         public DealEntity ToModel(DealEntity deal) => new()
@@ -193,6 +201,7 @@ namespace MalDealsBackend.Models.DTOs
             CouponCode = CouponCode,
             IsPublish = IsPublish,
             ExpirationDate = ExpirationDate,
+            VoteCount = VoteCount,
             CreatedAt = deal.CreatedAt,
             UpdatedAt = DateTime.UtcNow
         };

@@ -21,6 +21,7 @@ namespace MalDealsBackend.Migrations
                     thumbnail = table.Column<string>(type: "text", nullable: true),
                     is_public = table.Column<bool>(type: "boolean", nullable: false),
                     sub_category_ids = table.Column<string[]>(type: "text[]", nullable: true),
+                    parent_category_id = table.Column<Guid>(type: "uuid", nullable: true),
                     created_at = table.Column<DateTime>(type: "TIMESTAMP WITH TIME ZONE", nullable: false),
                     updated_at = table.Column<DateTime>(type: "TIMESTAMP WITH TIME ZONE", nullable: false)
                 },
@@ -33,13 +34,13 @@ namespace MalDealsBackend.Migrations
                 name: "deal_vote",
                 columns: table => new
                 {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
                     deal_id = table.Column<Guid>(type: "uuid", nullable: false),
-                    user_id = table.Column<Guid>(type: "uuid", nullable: false),
-                    value = table.Column<int>(type: "integer", nullable: false)
+                    user_id = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_deal_vote", x => x.deal_id);
+                    table.PrimaryKey("PK_deal_vote", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -63,6 +64,7 @@ namespace MalDealsBackend.Migrations
                     video_url = table.Column<string>(type: "VARCHAR(255)", maxLength: 255, nullable: true),
                     coupon_code = table.Column<string>(type: "VARCHAR(50)", maxLength: 50, nullable: true),
                     is_publish = table.Column<bool>(type: "boolean", nullable: false),
+                    vote_count = table.Column<int>(type: "integer", nullable: false),
                     expiration_date = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
                     created_at = table.Column<DateTime>(type: "TIMESTAMP WITH TIME ZONE", nullable: false),
                     updated_at = table.Column<DateTime>(type: "TIMESTAMP WITH TIME ZONE", nullable: false)
@@ -137,12 +139,13 @@ namespace MalDealsBackend.Migrations
                 name: "user_market_deals",
                 columns: table => new
                 {
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
                     user_id = table.Column<Guid>(type: "uuid", nullable: false),
                     deal_id = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_user_market_deals", x => x.user_id);
+                    table.PrimaryKey("PK_user_market_deals", x => x.id);
                 });
 
             migrationBuilder.CreateTable(

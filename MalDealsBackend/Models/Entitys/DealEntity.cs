@@ -60,6 +60,8 @@ namespace MalDealsBackend.Models.Entitys
 
         [Column("is_publish")]
         public bool IsPublish { get; set; } = false;
+        [Column("vote_count")]
+        public int VoteCount {get; set;}
 
         [Column("expiration_date")]
         [MaxLength(50)]

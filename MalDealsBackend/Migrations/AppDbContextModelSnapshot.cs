@@ -158,6 +158,10 @@ namespace MalDealsBackend.Migrations
                         .HasColumnType("VARCHAR(255)")
                         .HasColumnName("video_url");
 
+                    b.Property<int>("VoteCount")
+                        .HasColumnType("integer")
+                        .HasColumnName("vote_count");
+
                     b.HasKey("Id");
 
                     b.HasIndex("Title")
@@ -168,8 +172,11 @@ namespace MalDealsBackend.Migrations
 
             modelBuilder.Entity("MalDealsBackend.Models.Entitys.DealVoteEntity", b =>
                 {
-                    b.Property<Guid>("DealId")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("DealId")
                         .HasColumnType("uuid")
                         .HasColumnName("deal_id");
 
@@ -177,11 +184,7 @@ namespace MalDealsBackend.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("user_id");
 
-                    b.Property<int>("Value")
-                        .HasColumnType("integer")
-                        .HasColumnName("value");
-
-                    b.HasKey("DealId");
+                    b.HasKey("Id");
 
                     b.ToTable("deal_vote");
                 });

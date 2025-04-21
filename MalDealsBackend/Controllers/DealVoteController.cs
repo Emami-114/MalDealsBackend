@@ -10,7 +10,7 @@ namespace MalDealsBackend.Controllers
     {
         private readonly DealVoteServices _services = services;
         private readonly ILogger<DealVoteController> _logger = logger;
-        [HttpGet("{id}")]
+        [HttpGet("deal/{id}")]
         public async Task<IActionResult> GetDealVotes(Guid id)
         {
             try

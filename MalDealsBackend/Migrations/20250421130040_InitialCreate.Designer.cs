@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MalDealsBackend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250412162153_AddParentCategoryIdToCategory")]
-    partial class AddParentCategoryIdToCategory
+    [Migration("20250421130040_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -161,6 +161,10 @@ namespace MalDealsBackend.Migrations
                         .HasColumnType("VARCHAR(255)")
                         .HasColumnName("video_url");
 
+                    b.Property<int>("VoteCount")
+                        .HasColumnType("integer")
+                        .HasColumnName("vote_count");
+
                     b.HasKey("Id");
 
                     b.HasIndex("Title")
@@ -171,8 +175,11 @@ namespace MalDealsBackend.Migrations
 
             modelBuilder.Entity("MalDealsBackend.Models.Entitys.DealVoteEntity", b =>
                 {
-                    b.Property<Guid>("DealId")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("DealId")
                         .HasColumnType("uuid")
                         .HasColumnName("deal_id");
 
@@ -180,11 +187,7 @@ namespace MalDealsBackend.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("user_id");
 
-                    b.Property<int>("Value")
-                        .HasColumnType("integer")
-                        .HasColumnName("value");
-
-                    b.HasKey("DealId");
+                    b.HasKey("Id");
 
                     b.ToTable("deal_vote");
                 });
@@ -365,16 +368,20 @@ namespace MalDealsBackend.Migrations
 
             modelBuilder.Entity("MalDealsBackend.Models.Entitys.UserMarketDealEntity", b =>
                 {
-                    b.Property<Guid>("UserId")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid")
-                        .HasColumnName("user_id");
+                        .HasColumnName("id");
 
                     b.Property<Guid>("DealId")
                         .HasColumnType("uuid")
                         .HasColumnName("deal_id");
 
-                    b.HasKey("UserId");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("user_id");
+
+                    b.HasKey("Id");
 
                     b.ToTable("user_market_deals");
                 });
