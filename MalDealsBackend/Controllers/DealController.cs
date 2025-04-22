@@ -10,10 +10,11 @@ namespace MalDealsBackend.Controllers
 {
     [ApiController]
     [Route("api/deals")]
-    public class DealController(DealServices dealServices, ILogger<DealController> logger) : ControllerBase
+    public class DealController(DealServices dealServices,DealVoteServices dealVoteServices ,ILogger<DealController> logger) : ControllerBase
     {
         private readonly ILogger<DealController> _logger = logger;
         private readonly DealServices _dealServices = dealServices;
+        private readonly DealVoteServices _dealVoteService = dealVoteServices;
 
         [HttpGet]
         public async Task<ActionResult> GetDeals([FromQuery] DealFilterQuery query)
@@ -22,6 +23,11 @@ namespace MalDealsBackend.Controllers
             {
                 IEnumerable<DealEntity> deals = await _dealServices.GetDealsAsync(query);
                 var dealsDto = DealModelDto.ToDtos(deals); 
+                
+                foreach (var dealDto in dealsDto) {
+                    var votes = await _dealVoteService.GetDealVoteByDealIdAsync(dealDto.Id);
+                    dealDto.VoteCount = dealDto.VoteCount + votes.Count();
+                }
                 return Ok(dealsDto);
             }
             catch (Exception e)

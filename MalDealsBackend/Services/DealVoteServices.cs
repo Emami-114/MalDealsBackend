@@ -14,6 +14,12 @@ namespace MalDealsBackend.Services
             return dealVotes;
         }
 
+         public async Task<IEnumerable<DealVoteEntity>> GetDealVoteByUserIdAsync(Guid id)
+        {
+            IEnumerable<DealVoteEntity> dealVotes = await _dbContext.DealVotes.Where(x => x.UserId == id).AsNoTracking().ToListAsync();
+            return dealVotes;
+        }
+
         public async Task<DealVoteEntity?> GetDealVoteByDealIdAndUserIdAsync(Guid dealId, Guid userId)
         {
             DealVoteEntity? dealVoteEntity = await _dbContext.DealVotes.Where(x => x.DealId == dealId && x.UserId == userId).AsNoTracking().FirstOrDefaultAsync();

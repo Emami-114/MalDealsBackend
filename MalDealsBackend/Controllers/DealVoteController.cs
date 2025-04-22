@@ -11,11 +11,26 @@ namespace MalDealsBackend.Controllers
         private readonly DealVoteServices _services = services;
         private readonly ILogger<DealVoteController> _logger = logger;
         [HttpGet("deal/{id}")]
-        public async Task<IActionResult> GetDealVotes(Guid id)
+        public async Task<IActionResult> GetDealVotesByDealId(Guid id)
         {
             try
             {
                 IEnumerable<DealVoteEntity> dealVotes = await _services.GetDealVoteByDealIdAsync(id);
+                return Ok(dealVotes);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
+            }
+        }
+
+        [HttpGet("user/{id}")]
+        public async Task<IActionResult> GetDealVotesByUserId(Guid id)
+        {
+            try
+            {
+                IEnumerable<DealVoteEntity> dealVotes = await _services.GetDealVoteByUserIdAsync(id);
                 return Ok(dealVotes);
             }
             catch (Exception e)

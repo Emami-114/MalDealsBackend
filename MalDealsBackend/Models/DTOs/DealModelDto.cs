@@ -14,10 +14,10 @@ namespace MalDealsBackend.Models.DTOs
     string? UserId,
     string? CouponCode,
     string? ExpirationDate,
-    int VoteCount,
     DateTime UpdatedAt
     ) 
     {
+        public int VoteCount {get; set;}
         public static IEnumerable<DealModelDto> ToDtos(IEnumerable<DealEntity> deals)
         {
             return deals.Select(deal => new DealModelDto(
@@ -32,9 +32,10 @@ namespace MalDealsBackend.Models.DTOs
                 deal.UserId,
                 deal.CouponCode,
                 deal.ExpirationDate,
-                deal.VoteCount,
                 deal.UpdatedAt
-            ));
+            ) {
+                VoteCount = deal.VoteCount
+            });
         }
     }
     
