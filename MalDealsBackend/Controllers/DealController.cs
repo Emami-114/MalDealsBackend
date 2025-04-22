@@ -22,11 +22,13 @@ namespace MalDealsBackend.Controllers
             try
             {
                 IEnumerable<DealEntity> deals = await _dealServices.GetDealsAsync(query);
-                var dealsDto = DealModelDto.ToDtos(deals); 
+                var dealsDto = new List<DealModelDto>(); 
                 
-                foreach (var dealDto in dealsDto) {
-                    var votes = await _dealVoteService.GetDealVoteByDealIdAsync(dealDto.Id);
-                    dealDto.VoteCount = dealDto.VoteCount + votes.Count();
+                foreach (var deal in deals) {
+                    var votes = await _dealVoteService.GetDealVoteByDealIdAsync(deal.Id);
+                    if(votes != null) { deal.VoteCount  += votes.Count(); }
+                    var dto = DealModelDto.ToDto(deal);
+                    dealsDto.Add(dto);
                 }
                 return Ok(dealsDto);
             }
