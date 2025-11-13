@@ -124,6 +124,6 @@ jobs:
             API_KEY_SECRET_KEY=${{ secrets.API_KEY_SECRET_KEY }}
             EOF
 
-            docker-compose down
-            docker-compose pull
-            docker-compose -f docker-compose-prod.yml up -d
+            docker compose down
+            docker compose pull
+            docker compose -f docker-compose-prod.yml up -d
