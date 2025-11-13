@@ -1,5 +1,4 @@
 # Docker Compose file for MalDeals Production Environment
-version: '3.8'
 services:
   postgresdb:
     image: postgres:latest
@@ -17,7 +16,7 @@ services:
       timeout: 5s
       retries: 5
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - pg-data:/var/lib/postgresql
     networks:
       - maldeals_prod_network
 
@@ -85,31 +84,11 @@ services:
       - caddy_config:/config
     networks:
       - maldeals_prod_network
-  adguard:
-    image: adguard/adguardhome:latest
-    container_name: adguard
-    restart: unless-stopped
-    # Variante A: dedizierte Ports mappen (Host behält Netzstandard)
-    ports:
-      - "53:53/tcp"
-      - "53:53/udp"
-      - "853:853"
-      - "3000:3000/tcp"   # AdGuard UI Setup-Port (erste Einrichtung)
-      - "8080:80/tcp"     # spätere UI, wenn intern auf 80 läuft
-    volumes:
-      - ./adguard/work:/opt/adguardhome/work
-      - ./adguard/conf:/opt/adguardhome/conf
-    # Variante B (Alternative): Host-Netz verwenden, falls 53 anders schwierig
-    # network_mode: host
-    # Achtung: Dann keine ports:-Sektion und auf Host-Port-Konflikte achten. 
-    networks:
-      - maldeals_prod_network
-
 networks:
   maldeals_prod_network:
 
 volumes:
   minio_data:
-  postgres_data:
+  pg-data:
   caddy_data:
   caddy_config:

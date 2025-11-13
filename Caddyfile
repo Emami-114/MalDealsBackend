@@ -18,21 +18,3 @@ minio.maldeals.de {
     }
     tls ab.emami1140@gmail.com
 }
-
-adguard.maldeals.de {
-    encode zstd gzip
-    # Proxy zur AdGuard-UI (hier: Host 8080 -> Container 80)
-    reverse_proxy adguard:80
-    # Optional: Basic Auth für UI
-    # basicauth {
-    #   admin JDJhJDEwJDZ6...  # caddy hash-password nutzen
-    # }
-    # Optional: DoH Endpoint
-    @doh path /dns-query
-    reverse_proxy @doh adguard:443 {
-        transport http {
-            tls
-            tls_insecure_skip_verify
-        }
-    }
-}
