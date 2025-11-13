@@ -124,10 +124,6 @@ jobs:
             API_KEY_SECRET_KEY=${{ secrets.API_KEY_SECRET_KEY }}
             EOF
 
-            # Debugging: Prüfen, ob die Datei korrekt erstellt wurde
-            echo "Inhalt der .env-Datei:"
-            cat .env
-
             docker-compose down
             docker-compose pull
             docker-compose -f docker-compose-prod.yml up -d
